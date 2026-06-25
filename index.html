@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Syed Musadiq Hussain — AI/ML Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <script type="importmap">
         {
             "imports": {
@@ -22,8 +23,8 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -41,6 +42,7 @@
             --c: #06b6d4;
             --v: #7c3aed;
             --bg: #020617;
+            --scroll: 0%;
         }
 
         *,
@@ -59,7 +61,18 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* DOT GRID */
+        #scrollProgress {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #06b6d4, #7c3aed, #10b981);
+            z-index: 101;
+            width: 0%;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -70,7 +83,6 @@
             z-index: -3;
         }
 
-        /* AMBIENT */
         .ambient {
             position: fixed;
             top: -30vh;
@@ -102,7 +114,8 @@
         .tilt {
             transform-style: preserve-3d;
             will-change: transform;
-            transform: perspective(1100px) translate3d(0, calc(var(--lift, 0px) + var(--sfy, 0px)), 0) rotateX(calc(var(--rx, 0deg) + var(--sfrx, 0deg))) rotateY(calc(var(--ry, 0deg) + var(--sfry, 0deg)));
+            transform: perspective(1100px) translate3d(0, calc(var(--lift, 0px) + var(--sfy, 0px)), 0) rotateX(calc(var(
+                            --rx, 0deg) + var(--sfrx, 0deg))) rotateY(calc(var(--ry, 0deg) + var(--sfry, 0deg)));
             transition: transform 140ms ease, box-shadow 280ms ease, border-color 280ms ease, background 280ms ease;
         }
 
@@ -114,7 +127,6 @@
             #r3f-bg {
                 display: none;
             }
-
             .tilt {
                 transition: none;
                 transform: none;
@@ -169,7 +181,6 @@
             margin: 10px 0 18px;
         }
 
-        /* NAV */
         .nav-bar {
             position: fixed;
             top: 0;
@@ -212,6 +223,22 @@
             text-decoration: none;
             letter-spacing: 0.04em;
             transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 1.5px;
+            background: #06b6d4;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -238,7 +265,6 @@
             transform: translateY(-1px);
         }
 
-        /* MOBILE NAV */
         .nav-mobile-btn {
             display: none;
             background: none;
@@ -282,7 +308,6 @@
             color: #fff;
         }
 
-        /* GLASS CARD */
         .glass {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.07);
@@ -309,7 +334,6 @@
             box-shadow: 0 0 40px rgba(16, 185, 129, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
-        /* HERO IMAGE */
         .hero-img-wrap {
             position: relative;
             width: 220px;
@@ -366,7 +390,6 @@
             overflow: hidden;
         }
 
-        /* TYPOGRAPHY */
         .text-gradient {
             background: linear-gradient(135deg, #fff 0%, #06b6d4 45%, #a78bfa 100%);
             -webkit-background-clip: text;
@@ -393,7 +416,6 @@
             opacity: 0.6;
         }
 
-        /* PILLS */
         .pill {
             display: inline-flex;
             align-items: center;
@@ -441,6 +463,12 @@
             background: rgba(251, 191, 36, 0.08);
         }
 
+        .pill-gray {
+            border-color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
         .filter-row {
             display: flex;
             gap: 12px;
@@ -459,6 +487,7 @@
             outline: none;
             font-size: 14px;
             backdrop-filter: blur(14px);
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .filter-input::placeholder {
@@ -503,9 +532,19 @@
             letter-spacing: 0.04em;
         }
 
-        /* STAT BOX */
         .stat-box {
             text-align: center;
+            position: relative;
+        }
+
+        .stat-box:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%;
+            height: 80%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .stat-num {
@@ -523,7 +562,83 @@
             margin-top: 2px;
         }
 
-        /* PROJECT CARD */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .achievement-card {
+            padding: 24px 20px;
+            text-align: center;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(6, 182, 212, 0.25);
+            background: rgba(6, 182, 212, 0.04);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .achievement-card .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .achievement-card .number {
+            font-family: "Outfit", sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #06b6d4;
+        }
+
+        .achievement-card .desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .achievement-card .tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            padding: 2px 10px;
+            border-radius: 100px;
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            color: rgba(6, 182, 212, 0.6);
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        .achievement-card.violet .number {
+            color: #a78bfa;
+        }
+        .achievement-card.violet .tag {
+            border-color: rgba(124, 58, 237, 0.2);
+            color: rgba(124, 58, 237, 0.6);
+        }
+        .achievement-card.green .number {
+            color: #10b981;
+        }
+        .achievement-card.green .tag {
+            border-color: rgba(16, 185, 129, 0.2);
+            color: rgba(16, 185, 129, 0.6);
+        }
+        .achievement-card.gold .number {
+            color: #fbbf24;
+        }
+        .achievement-card.gold .tag {
+            border-color: rgba(251, 191, 36, 0.2);
+            color: rgba(251, 191, 36, 0.6);
+        }
+
         .project-icon {
             width: 44px;
             height: 44px;
@@ -552,7 +667,17 @@
             border-color: rgba(251, 191, 36, 0.2);
         }
 
-        /* BENTO GRID */
+        .featured-badge {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05));
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            letter-spacing: 0.06em;
+        }
+
         .bento {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -562,20 +687,16 @@
         .b-8 {
             grid-column: span 8;
         }
-
         .b-4 {
             grid-column: span 4;
         }
-
         .b-6 {
             grid-column: span 6;
         }
-
         .b-12 {
             grid-column: span 12;
         }
 
-        /* SECTION DIVIDER */
         hr.fancy {
             border: none;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -583,14 +704,11 @@
             max-width: 1100px;
         }
 
-        /* ANIMATIONS */
         @keyframes glowPulse {
-
             0%,
             100% {
                 opacity: 0.6;
             }
-
             50% {
                 opacity: 1;
             }
@@ -600,7 +718,6 @@
             from {
                 transform: rotate(0deg);
             }
-
             to {
                 transform: rotate(360deg);
             }
@@ -610,7 +727,6 @@
             0% {
                 top: -10%;
             }
-
             100% {
                 top: 110%;
             }
@@ -621,7 +737,6 @@
                 opacity: 0;
                 transform: translateY(24px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -642,20 +757,19 @@
         .delay-1 {
             transition-delay: 0.1s;
         }
-
         .delay-2 {
             transition-delay: 0.2s;
         }
-
         .delay-3 {
             transition-delay: 0.3s;
         }
-
         .delay-4 {
             transition-delay: 0.4s;
         }
+        .delay-5 {
+            transition-delay: 0.5s;
+        }
 
-        /* BACK TO TOP */
         #backToTop {
             position: fixed;
             bottom: 92px;
@@ -689,7 +803,6 @@
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
         }
 
-        /* WA FLOAT */
         .wa-float {
             position: fixed;
             bottom: 28px;
@@ -714,74 +827,117 @@
             transform: translateY(-2px) scale(1.02);
         }
 
-        /* SCROLLBAR */
+        .skill-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .skill-bar-track {
+            flex: 1;
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #06b6d4, #7c3aed);
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .skill-label {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            min-width: 80px;
+        }
+        .skill-pct {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            min-width: 32px;
+            text-align: right;
+        }
+
         ::-webkit-scrollbar {
             width: 4px;
         }
-
         ::-webkit-scrollbar-track {
             background: #020617;
         }
-
         ::-webkit-scrollbar-thumb {
             background: rgba(6, 182, 212, 0.4);
             border-radius: 2px;
         }
 
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             .nav-bar {
                 padding: 0 20px;
             }
-
             .nav-links {
                 display: none;
             }
-
             .nav-desktop-cta {
                 display: none;
             }
-
             .nav-mobile-btn {
                 display: block;
             }
-
             .bento {
                 grid-template-columns: 1fr;
             }
-
             .b-8,
             .b-4,
             .b-6,
             .b-12 {
                 grid-column: span 1;
             }
-
             .hero-flex {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-
             .hero-img-wrap {
                 width: 160px;
                 height: 160px;
             }
-
             .hero-stats {
                 justify-content: center;
             }
-
             hr.fancy {
                 margin: 0 20px;
             }
-
             section {
                 padding: 80px 20px;
             }
-
             .philo-grid {
                 grid-template-columns: 1fr;
+            }
+            .achievement-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .achievement-card {
+                padding: 18px 14px;
+            }
+            .achievement-card .number {
+                font-size: 22px;
+            }
+            .stat-box:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .achievement-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .achievement-card .icon {
+                font-size: 22px;
+            }
+            .achievement-card .number {
+                font-size: 20px;
             }
         }
     </style>
@@ -789,28 +945,28 @@
 
 <body>
 
+    <div id="scrollProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
     <div id="r3f-bg" aria-hidden="true"></div>
 
     <div class="ambient"></div>
 
-    <!-- BACK TO TOP -->
-    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/923340051614" target="_blank" class="wa-float">
+    <a href="https://wa.me/923340051614" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
         </svg>
         +92 334 005 1614
     </a>
 
-    <!-- NAV -->
-    <nav class="nav-bar">
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
         <a href="#" class="nav-logo">SMH<span>.</span></a>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#stack">Stack</a></li>
+            <li><a href="#achievements">Achievements</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#philosophy">Philosophy</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -818,19 +974,19 @@
         <a href="https://wa.me/923340051614" target="_blank" class="wa-nav nav-desktop-cta">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
             </svg>
             WhatsApp
         </a>
         <button id="deepModeBtn" class="deep-toggle" type="button" aria-pressed="false">DEEP</button>
-        <button class="nav-mobile-btn"
-            onclick="document.getElementById('mobileMenu').classList.toggle('open')">☰</button>
+        <button class="nav-mobile-btn" onclick="document.getElementById('mobileMenu').classList.toggle('open')"
+        aria-label="Toggle menu">☰</button>
     </nav>
 
-    <!-- MOBILE MENU -->
-    <div id="mobileMenu" class="mobile-menu">
+    <div id="mobileMenu" class="mobile-menu" role="dialog" aria-label="Mobile navigation">
         <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
         <a href="#stack" onclick="document.getElementById('mobileMenu').classList.remove('open')">Stack</a>
+        <a href="#achievements" onclick="document.getElementById('mobileMenu').classList.remove('open')">Achievements</a>
         <a href="#projects" onclick="document.getElementById('mobileMenu').classList.remove('open')">Projects</a>
         <a href="#philosophy" onclick="document.getElementById('mobileMenu').classList.remove('open')">Philosophy</a>
         <a href="#contact" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
@@ -838,917 +994,1125 @@
             WhatsApp: +92 334 005 1614</a>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO SECTION WITH RESUME SUMMARY -->
     <section id="about"
-        style="min-height:100vh; display:flex; align-items:center; padding: 100px 40px 80px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
-        <div style="width:100%;">
-            <div class="hero-flex" style="display:flex; align-items:center; gap:72px; margin-bottom:60px;">
+    style="min-height:100vh; display:flex; align-items:center; padding: 100px 40px 80px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
+    <div style="width:100%;">
+        <div class="hero-flex" style="display:flex; align-items:center; gap:72px; margin-bottom:40px;">
 
-                <!-- Profile Image -->
-                <div class="hero-img-wrap">
-                    <div class="hero-img-aura"></div>
-                    <div class="hero-img-ring"></div>
-                    <div class="hero-img-inner">
-                   <img src="images/musadiq_profile.png" alt="Musadiq Hussain profile picture">
-                        <div class="scan-line"></div>
-                    </div>
-                </div>
-
-                <!-- Hero Text -->
-                <div style="flex:1;">
-                    <div class="label reveal" style="margin-bottom:20px;">AI/ML ENGINEER · I-8 MARKAZ, ISLAMABAD, PK</div>
-                    <h1 class="reveal delay-1"
-                        style="font-family:'Outfit',sans-serif; font-size:clamp(38px,5vw,72px); font-weight:900; line-height:1.03; letter-spacing:-0.04em; margin-bottom:20px;">
-                        <span class="text-gradient">Orchestrating Intelligence<br>through Autonomous<br>Agents.</span>
-                    </h1>
-                    <p class="reveal delay-2"
-                        style="font-size:17px; color:rgba(255,255,255,0.55); line-height:1.75; max-width:520px; margin-bottom:32px; font-weight:300;">
-                        I design and ship production-grade agentic workflows, RAG pipelines, and computer vision systems
-                        — turning cutting-edge AI research into tools that create real impact.
-                    </p>
-                    <div class="reveal delay-3" style="display:flex; gap:12px; flex-wrap:wrap;">
-                        <a href="https://wa.me/923340051614" target="_blank"
-                            style="display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:10px; font-size:15px; font-weight:700; background:linear-gradient(135deg,#25d366,#128c7e); color:#fff; text-decoration:none; box-shadow:0 4px 24px rgba(37,211,102,0.3); transition:all 0.2s;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                            </svg>
-                            Chat on WhatsApp
-                        </a>
-                        <a href="#projects"
-                            style="display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:10px; font-size:15px; font-weight:600; border:1px solid rgba(255,255,255,0.1); color:#fff; text-decoration:none; background:rgba(255,255,255,0.04); backdrop-filter:blur(10px); transition:all 0.2s;">
-                            View Projects →
-                        </a>
-                        <a href="https://github.com/syedmusadiqhussain" target="_blank"
-                            style="display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:10px; font-size:15px; font-weight:600; border:1px solid rgba(255,255,255,0.1); color:#fff; text-decoration:none; background:rgba(255,255,255,0.04); backdrop-filter:blur(10px); transition:all 0.2s;">
-                            GitHub ↗
-                        </a>
-                    </div>
+            <div class="hero-img-wrap">
+                <div class="hero-img-aura"></div>
+                <div class="hero-img-ring"></div>
+                <div class="hero-img-inner">
+                    <img src="https://ui-avatars.com/api/?name=Syed+Musadiq+Hussain&size=220&background=0a0a1a&color=06b6d4&bold=true"
+                    alt="Musadiq Hussain profile picture">
+                    <div class="scan-line"></div>
                 </div>
             </div>
 
-            <!-- STATS -->
-            <div class="hero-stats reveal delay-4"
-                style="display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.06); padding-top:40px; flex-wrap:wrap;">
-                <div class="stat-box"
-                    style="flex:1; padding:0 32px; border-right:1px solid rgba(255,255,255,0.06); min-width:120px;">
-                    <div class="stat-num" style="color:#06b6d4;">20<span
-                            style="color:rgba(255,255,255,0.4); font-size:24px;">+</span></div>
-                    <div class="stat-label">AI/ML Projects</div>
-                </div>
-                <div class="stat-box"
-                    style="flex:1; padding:0 32px; border-right:1px solid rgba(255,255,255,0.06); min-width:120px;">
-                    <div class="stat-num" style="color:#a78bfa;">85</div>
-                    <div class="stat-label">GitHub Contributions</div>
-                </div>
-                <div class="stat-box"
-                    style="flex:1; padding:0 32px; border-right:1px solid rgba(255,255,255,0.06); min-width:120px;">
-                    <div class="stat-num" style="color:#10b981;">6<span
-                            style="color:rgba(255,255,255,0.4); font-size:24px;">+</span></div>
-                    <div class="stat-label">Agent Frameworks</div>
-                </div>
-                <div class="stat-box" style="flex:1; padding:0 32px; min-width:120px;">
-                    <div class="stat-num" style="color:#fbbf24;">3<span
-                            style="color:rgba(255,255,255,0.4); font-size:24px;">–8h</span></div>
-                    <div class="stat-label">Daily Deep Work</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="fancy">
-
-    <!-- TECH STACK -->
-    <section id="stack" style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
-        <div class="label reveal" style="margin-bottom:12px;">Core Expertise</div>
-        <h2 class="reveal"
-            style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:48px;">
-            My Tech Stack</h2>
-
-        <div class="bento">
-            <!-- Agentic AI - Large -->
-            <div class="glass b-8 reveal" style="padding:32px;">
-                <div style="font-size:28px; margin-bottom:16px;">🤖</div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; color:#06b6d4;">
-                    Agentic AI Systems</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; margin-bottom:18px;">Designing
-                    multi-agent pipelines with memory, tools, and coordination layers for autonomous decision-making at
-                    production scale.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                    <span class="pill">CrewAI</span><span class="pill">LangGraph</span><span
-                        class="pill">LangChain</span><span class="pill">n8n</span><span class="pill">AutoGen</span>
-                </div>
-            </div>
-            <!-- Computer Vision -->
-            <div class="glass b-4 reveal delay-1" style="padding:32px;">
-                <div style="font-size:28px; margin-bottom:16px;">👁️</div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; color:#a78bfa;">
-                    Computer Vision</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; margin-bottom:18px;">Real-time
-                    detection, segmentation & OCR pipelines.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                    <span class="pill pill-v">YOLO v8</span><span class="pill pill-v">OpenCV</span><span
-                        class="pill pill-v">PyTorch</span><span class="pill pill-v">TF</span>
-                </div>
-            </div>
-            <!-- LLMs -->
-            <div class="glass b-4 reveal delay-2 scroll-float" data-depth="1.25" style="padding:32px;">
-                <div style="font-size:28px; margin-bottom:16px;">⚡</div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; color:#10b981;">
-                    LLM Stack</h3>
-                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;">
-                    <span class="pill pill-e">GPT-4o</span><span class="pill pill-e">Gemini 1.5</span><span
-                        class="pill pill-e">Gemini 2.0</span><span class="pill pill-e">Claude</span><span
-                        class="pill pill-e">Mistral</span><span class="pill pill-e">Llama 3</span>
-                </div>
-            </div>
-            <!-- RAG -->
-            <div class="glass b-8 reveal delay-1 scroll-float" data-depth="0.9" style="padding:32px;">
-                <div style="font-size:28px; margin-bottom:16px;">🗄️</div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; color:#06b6d4;">
-                    RAG & Vector DBs</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; margin-bottom:18px;">Building
-                    retrieval pipelines with semantic search, hallucination control, and multi-document reasoning.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                    <span class="pill">Pinecone</span><span class="pill">ChromaDB</span><span
-                        class="pill">Supabase</span><span class="pill">FAISS</span><span
-                        class="pill">pgvector</span><span class="pill">Sentence-BERT</span>
-                </div>
-            </div>
-            <!-- MLOps -->
-            <div class="glass b-6 reveal delay-2"
-                style="padding:32px; background:rgba(124,58,237,0.04); border-color:rgba(124,58,237,0.15);">
-                <div style="font-size:28px; margin-bottom:16px;">🚀</div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; color:#a78bfa;">
-                    MLOps & Deployment</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; margin-bottom:18px;">CI/CD
-                    pipelines, containerization, and cloud-native AI deployment workflows.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                    <span class="pill pill-v">Docker</span><span class="pill pill-v">FastAPI</span><span
-                        class="pill pill-v">Flask</span><span class="pill pill-v">AWS</span><span
-                        class="pill pill-v">GCP</span><span class="pill pill-v">Streamlit</span>
-                </div>
-            </div>
-            <!-- APIs -->
-            <div class="glass b-6 reveal delay-3"
-                style="padding:32px; background:rgba(16,185,129,0.03); border-color:rgba(16,185,129,0.1);">
-                <div style="font-size:28px; margin-bottom:16px;">🔌</div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:10px; color:#10b981;">
-                    Integrations</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; margin-bottom:18px;">Production
-                    integrations across voice, messaging, and data platforms.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                    <span class="pill pill-e">Twilio</span><span class="pill pill-e">Whisper</span><span
-                        class="pill pill-e">Serper</span><span class="pill pill-e">PostgreSQL</span><span
-                        class="pill pill-e">Supabase</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="fancy">
-
-    <!-- PROJECTS -->
-    <section id="projects" style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
-        <div class="label reveal" style="margin-bottom:12px;">Selected Work</div>
-        <h2 class="reveal"
-            style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:48px;">
-            Projects</h2>
-
-        <div class="filter-row reveal delay-1">
-            <div style="flex:1; min-width:240px;">
-                <input id="projectSearch" class="filter-input" type="search" autocomplete="off"
-                    placeholder="Search projects (agents, RAG, vision, voice…)" aria-label="Search projects">
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                <button type="button" class="filter-chip active" data-filter="all">ALL</button>
-                <button type="button" class="filter-chip" data-filter="agent">AGENTS</button>
-                <button type="button" class="filter-chip" data-filter="rag">RAG</button>
-                <button type="button" class="filter-chip" data-filter="voice">VOICE</button>
-                <button type="button" class="filter-chip" data-filter="fintech">FINTECH</button>
-            </div>
-            <div id="projectMeta" class="filter-meta" style="margin-left:auto;">Showing 0</div>
-        </div>
-
-        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;" class="projects-grid">
-
-            <!-- University Search Agent - FEATURED -->
-            <div class="glass glass-hover reveal" style="padding:32px; grid-column:span 2;" data-category="agent"
-                data-title="University Search Agent"
-                data-tags="crewai supabase openai flask python student profiling multi-agent scoring recommender scraper">
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
-                    <div>
-                        <div
-                            style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
-                            <div class="project-icon">🎓</div>
-                            <span
-                                style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(6,182,212,0.3); color:#06b6d4; background:rgba(6,182,212,0.08);">MULTI-AGENT</span>
-                        </div>
-                        <h3
-                            style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.02em; margin-bottom:12px;">
-                            University Search Agent</h3>
-                        <p style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.75; margin-bottom:20px;">An
-                            AI-powered university matching platform for pgadmit.com. Autonomously searches, scores, and
-                            categorizes universities into Safety / Target / Reach tiers using live data and student
-                            profiles stored in Supabase.</p>
-                        <div
-                            style="background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.1); border-radius:8px; padding:14px 16px; font-size:13px; color:rgba(255,255,255,0.55); line-height:1.6; margin-bottom:20px;">
-                            <span style="color:#06b6d4; font-weight:600;">Key Innovation:</span> CrewAI coordinates
-                            specialized sub-agents — Scraper, Scorer, and Recommender — producing a complete university
-                            shortlist in under 30 seconds.
-                        </div>
-                    </div>
-                    <div>
-                        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:24px;">
-                            <span class="pill">CrewAI</span><span class="pill">Supabase</span><span
-                                class="pill">OpenAI</span><span class="pill">Flask</span><span
-                                class="pill">Python</span><span class="pill">Student Profiling</span>
-                        </div>
-                        <a href="https://github.com/syedmusadiqhussain" target="_blank"
-                            style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#06b6d4; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:gap 0.2s;">View
-                            on GitHub →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RAE Enterprise -->
-            <div class="glass glass-e reveal delay-1" style="padding:32px;" data-category="fintech"
-                data-title="RAE Enterprise"
-                data-tags="finbert pytorch fastapi xau/usd crypto sentiment ai market intelligence news social technicals">
-                <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
-                    <div class="project-icon project-icon-gold">📈</div>
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(251,191,36,0.3); color:#fbbf24; background:rgba(251,191,36,0.08);">SENTIMENT
-                        AI</span>
-                </div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
-                    RAE Enterprise</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">AI-driven
-                    market intelligence suite for XAU/USD gold and crypto markets. Analyzes sentiment signals from news,
-                    social data, and technicals to generate actionable trading insights.</p>
-                <div
-                    style="background:rgba(251,191,36,0.05); border:1px solid rgba(251,191,36,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
-                    <span style="color:#fbbf24; font-weight:600;">Stack:</span> FinBERT ensemble + LLM narrative
-                    analysis for macro market context.
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
-                    <span class="pill pill-gold">FinBERT</span><span class="pill pill-gold">PyTorch</span><span
-                        class="pill pill-gold">FastAPI</span><span class="pill pill-gold">XAU/USD</span><span
-                        class="pill pill-gold">Crypto</span>
-                </div>
-                <div class="gh-metrics" data-github-repo="syedmusadiqhussain/syedmusadiqhussain.github.io"></div>
-                <a href="https://github.com/syedmusadiqhussain" target="_blank"
-                    style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#fbbf24; text-decoration:none;">View
-                    on GitHub →</a>
-            </div>
-
-            <!-- AI Career Agent -->
-            <div class="glass glass-v reveal delay-2" style="padding:32px;" data-category="agent"
-                data-title="AI Career Agent"
-                data-tags="gemini fastapi python self-healing scraper job discovery outreach dom selectors">
-                <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
-                    <div class="project-icon project-icon-v">💼</div>
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(124,58,237,0.3); color:#a78bfa; background:rgba(124,58,237,0.08);">SELF-HEALING</span>
-                </div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
-                    AI Career Agent</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">Fully
-                    autonomous job discovery engine that finds roles, identifies hiring managers, and sends personalized
-                    cold outreach — without human intervention.</p>
-                <div
-                    style="background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
-                    <span style="color:#a78bfa; font-weight:600;">Key Innovation:</span> Self-healing scraper that
-                    adapts its selectors in real-time when DOM changes are detected.
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
-                    <span class="pill pill-v">Gemini 1.5 Pro</span><span class="pill pill-v">FastAPI</span><span
-                        class="pill pill-v">Python</span><span class="pill pill-v">Self-Healing Scraper</span>
-                </div>
-                <a href="https://github.com/syedmusadiqhussain" target="_blank"
-                    style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#a78bfa; text-decoration:none;">View
-                    on GitHub →</a>
-            </div>
-
-            <!-- AI Voice WhatsApp -->
-            <div class="glass glass-hover reveal delay-1" style="padding:32px;" data-category="voice"
-                data-title="AI Voice WhatsApp Helper"
-                data-tags="twilio whisper gemini serper whatsapp voice assistant realtime webhook transcription intent retrieval">
-                <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
-                    <div class="project-icon">🎙️</div>
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(6,182,212,0.3); color:#06b6d4; background:rgba(6,182,212,0.08);">REAL-TIME</span>
-                </div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
-                    AI Voice WhatsApp Helper</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">Production
-                    WhatsApp voice assistant that transcribes voice notes, processes intent with Gemini 2.0, retrieves
-                    web context via Serper, and replies — in seconds.</p>
-                <div
-                    style="background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
-                    <span style="color:#06b6d4; font-weight:600;">Pipeline:</span> Twilio webhook → Whisper
-                    transcription → Gemini 2.0 → Serper → Reply.
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
-                    <span class="pill">Twilio</span><span class="pill">Whisper</span><span class="pill">Gemini
-                        2.0</span><span class="pill">Serper</span>
-                </div>
-                <a href="https://github.com/syedmusadiqhussain" target="_blank"
-                    style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#06b6d4; text-decoration:none;">View
-                    on GitHub →</a>
-            </div>
-
-            <!-- RAG Chat -->
-            <div class="glass glass-e reveal delay-2" style="padding:32px;" data-category="rag"
-                data-title="RAG Chat Assistant"
-                data-tags="langchain chromadb pinecone transformers retrieval semantic search citations confidence hallucination control">
-                <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
-                    <div class="project-icon project-icon-e">🗄️</div>
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(16,185,129,0.3); color:#10b981; background:rgba(16,185,129,0.08);">CONTEXT-AWARE</span>
-                </div>
-                <h3
-                    style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
-                    RAG Chat Assistant</h3>
-                <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">End-to-end
-                    RAG pipeline for chatting with private document collections. Features multi-document reasoning,
-                    semantic search, and active hallucination control via confidence scoring.</p>
-                <div
-                    style="background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
-                    <span style="color:#10b981; font-weight:600;">Architecture:</span> LangChain + ChromaDB with
-                    citation tracking. Refuses to hallucinate below confidence threshold.
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
-                    <span class="pill pill-e">LangChain</span><span class="pill pill-e">ChromaDB</span><span
-                        class="pill pill-e">Pinecone</span><span class="pill pill-e">Transformers</span>
-                </div>
-                <a href="https://github.com/syedmusadiqhussain" target="_blank"
-                    style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#10b981; text-decoration:none;">View
-                    on GitHub →</a>
-            </div>
-
-        </div>
-    </section>
-
-    <hr class="fancy">
-
-    <!-- PHILOSOPHY -->
-    <section id="philosophy" style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
-        <div class="label reveal" style="margin-bottom:12px;">Work Ethic</div>
-        <h2 class="reveal"
-            style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:48px;">
-            Technical Philosophy</h2>
-
-        <div class="glass reveal"
-            style="padding:56px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; position:relative; overflow:hidden;"
-            class="philo-grid">
-            <div
-                style="position:absolute; top:-80px; right:-80px; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle, rgba(6,182,212,0.07), transparent); pointer-events:none;">
-            </div>
-
-            <div>
-                <div
-                    style="font-family:'Outfit',sans-serif; font-size:clamp(26px,3vw,42px); font-weight:900; line-height:1.15; letter-spacing:-0.04em; margin-bottom:24px;">
-                    "Deep work is the <span style="color:#06b6d4;">superpower</span> of the <span
-                        style="color:#a78bfa;">AI generation.</span>"
-                </div>
-                <p style="font-size:14px; color:rgba(255,255,255,0.45); line-height:1.75;">My approach combines
-                    structured deep work sessions with rapid vibe coding — first understanding the problem deeply, then
-                    shipping fast.</p>
-            </div>
-
-            <div style="display:flex; flex-direction:column; gap:22px;">
-                <div style="display:flex; gap:16px; align-items:flex-start;">
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#06b6d4; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">3–8h</span>
-                    <div>
-                        <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Daily Deep Work</h4>
-                        <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Every day structured
-                            around focused, distraction-free sessions on complex AI systems. No shallow work in core
-                            hours.</p>
-                    </div>
-                </div>
-                <div style="display:flex; gap:16px; align-items:flex-start;">
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#a78bfa; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">01</span>
-                    <div>
-                        <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Vibe Coding for Rapid
-                            Orchestration</h4>
-                        <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Leveraging intuition
-                            and AI-assisted coding to ship high-quality agentic systems at speed — without sacrificing
-                            reliability.</p>
-                    </div>
-                </div>
-                <div style="display:flex; gap:16px; align-items:flex-start;">
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#10b981; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">02</span>
-                    <div>
-                        <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Research First, Always</h4>
-                        <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Every project begins
-                            with understanding the state-of-the-art. Papers before prototypes. Understanding before
-                            implementation.</p>
-                    </div>
-                </div>
-                <div style="display:flex; gap:16px; align-items:flex-start;">
-                    <span
-                        style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#fbbf24; background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">03</span>
-                    <div>
-                        <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Production Mindset</h4>
-                        <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Every model gets
-                            containerized, every API gets documented, every system is tested at scale. No notebooks-only
-                            projects.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="fancy">
-
-    <!-- CONTACT -->
-    <section id="contact"
-        style="padding:100px 40px 80px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
-        <div class="label reveal" style="margin-bottom:12px;">Get In Touch</div>
-        <h2 class="reveal"
-            style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:16px;">
-            Let's Build Something</h2>
-        <p class="reveal"
-            style="font-size:16px; color:rgba(255,255,255,0.45); margin-bottom:48px; max-width:480px; line-height:1.7;">
-            Open to collaborations, freelance projects, and full-time roles in AI/ML engineering.</p>
-
-        <!-- Big WhatsApp CTA -->
-        <div class="glass reveal"
-            style="padding:40px; text-align:center; margin-bottom:32px; background:rgba(37,211,102,0.03); border-color:rgba(37,211,102,0.15);">
-            <div style="font-size:36px; margin-bottom:12px;">💬</div>
-            <h3 style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:800; margin-bottom:8px;">Chat on
-                WhatsApp</h3>
-            <p style="font-size:14px; color:rgba(255,255,255,0.45); margin-bottom:24px;">The fastest way to reach me. I
-                typically respond within a few hours.</p>
+            <div style="flex:1;">
+                <div class="label reveal" style="margin-bottom:20px;">AI/ML Engineer · Islamabad, PK</div>
+                <h1 class="reveal delay-1"
+                style="font-family:'Outfit',sans-serif; font-size:clamp(38px,5vw,72px); font-weight:900; line-height:1.03; letter-spacing:-0.04em; margin-bottom:20px;">
+                <span class="text-gradient">Orchestrating Intelligence<br>through Autonomous<br>Agents.</span>
+            </h1>
+            <!-- Full resume summary (replaces the short blurb) -->
+            <p class="reveal delay-2"
+            style="font-size:15px; color:rgba(255,255,255,0.6); line-height:1.8; max-width:560px; margin-bottom:24px; font-weight:300;">
+            Early-career AI/ML Developer with hands-on project experience designing and building
+            <strong style="color:#fff;">Retrieval-Augmented Generation (RAG) pipelines</strong>,
+            <strong style="color:#fff;">LLM integrations</strong>, and end-to-end automation systems.
+            Skilled in Python development, API design, vector search, containerization, and cloud
+            deployment (GCP). Strong foundation in prompt engineering, NLP concepts, and applied
+            machine learning, with a continuous focus on MLOps practices, scalable system design,
+            and production-ready AI solutions.
+        </p>
+        <div class="reveal delay-3" style="display:flex; gap:12px; flex-wrap:wrap;">
             <a href="https://wa.me/923340051614" target="_blank"
-                style="display:inline-flex; align-items:center; gap:10px; padding:16px 32px; border-radius:12px; font-size:16px; font-weight:700; background:linear-gradient(135deg,#25d366,#128c7e); color:#fff; text-decoration:none; box-shadow:0 4px 28px rgba(37,211,102,0.35); transition:all 0.2s;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                </svg>
-                +92 334 005 1614
-            </a>
-        </div>
+            style="display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:10px; font-size:15px; font-weight:700; background:linear-gradient(135deg,#25d366,#128c7e); color:#fff; text-decoration:none; box-shadow:0 4px 24px rgba(37,211,102,0.3); transition:all 0.2s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            </svg>
+            Chat on WhatsApp
+        </a>
+        <a href="#projects"
+        style="display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:10px; font-size:15px; font-weight:600; border:1px solid rgba(255,255,255,0.1); color:#fff; text-decoration:none; background:rgba(255,255,255,0.04); backdrop-filter:blur(10px); transition:all 0.2s;">
+        View Projects →
+    </a>
+    <a href="https://github.com/syedmusadiqhussain" target="_blank"
+    style="display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:10px; font-size:15px; font-weight:600; border:1px solid rgba(255,255,255,0.1); color:#fff; text-decoration:none; background:rgba(255,255,255,0.04); backdrop-filter:blur(10px); transition:all 0.2s;">
+    GitHub ↗
+</a>
+</div>
+</div>
+</div>
 
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:80px;">
-            <a href="mailto:syedmusadiqhussain9@gmail.com" class="glass glass-hover"
-                style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
-                <div
-                    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
-                    📧</div>
-                <div>
-                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Email</div>
-                    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
-                        syedmusadiqhussain9@gmail.com</div>
-                </div>
-            </a>
-            <a href="https://github.com/syedmusadiqhussain" target="_blank" class="glass glass-hover"
-                style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
-                <div
-                    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
-                    💻</div>
-                <div>
-                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">GitHub</div>
-                    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
-                        syedmusadiqhussain</div>
-                </div>
-            </a>
-            <a href="https://www.linkedin.com/in/syed-musadiq-hussain-9ba797336/" target="_blank"
-                class="glass glass-hover"
-                style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
-                <div
-                    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
-                    💼</div>
-                <div>
-                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">LinkedIn</div>
-                    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">Syed
-                        Musadiq Hussain</div>
-                </div>
-            </a>
-            <a href="https://www.kaggle.com/syedmusadiqhussain" target="_blank" class="glass glass-hover"
-                style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
-                <div
-                    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
-                    📊</div>
-                <div>
-                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Kaggle</div>
-                    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
-                        syedmusadiqhussain</div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/@SyedMusadiqHussain-v8w" target="_blank" class="glass glass-hover"
-                style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
-                <div
-                    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
-                    🎥</div>
-                <div>
-                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">YouTube</div>
-                    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
-                        @SyedMusadiqHussain-v8w</div>
-                </div>
-            </a>
-            <a href="https://syedmusadiqhussain.github.io/" target="_blank" class="glass glass-hover"
-                style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
-                <div
-                    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
-                    🌐</div>
-                <div>
-                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Portfolio</div>
-                    <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
-                        syedmusadiqhussain.github.io</div>
-                </div>
-            </a>
-        </div>
-    </section>
+<div class="hero-stats reveal delay-4"
+style="display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.06); padding-top:40px; flex-wrap:wrap;">
+<div class="stat-box" style="flex:1; padding:0 32px; min-width:120px;">
+    <div class="stat-num" style="color:#06b6d4;">8<span
+        style="color:rgba(255,255,255,0.4); font-size:24px;">+</span></div>
+    <div class="stat-label">AI/ML Projects</div>
+</div>
+<div class="stat-box" style="flex:1; padding:0 32px; min-width:120px;">
+    <div class="stat-num" style="color:#a78bfa;">106</div>
+    <div class="stat-label">GitHub Contributions</div>
+</div>
+<div class="stat-box" style="flex:1; padding:0 32px; min-width:120px;">
+    <div class="stat-num" style="color:#10b981;">6<span
+        style="color:rgba(255,255,255,0.4); font-size:24px;">+</span></div>
+    <div class="stat-label">Agent Frameworks</div>
+</div>
+<div class="stat-box" style="flex:1; padding:0 32px; min-width:120px;">
+    <div class="stat-num" style="color:#fbbf24;">3<span
+        style="color:rgba(255,255,255,0.4); font-size:24px;">–8h</span></div>
+    <div class="stat-label">Daily Deep Work</div>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- FOOTER -->
-    <footer
-        style="border-top:1px solid rgba(255,255,255,0.05); padding:28px 40px; max-width:1180px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(255,255,255,0.3);">© 2026 Syed
-            Musadiq Hussain</span>
+<hr class="fancy">
+
+<!-- TECH STACK - Expanded with Resume Skills -->
+<section id="stack" style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
+    <div class="label reveal" style="margin-bottom:12px;">Core Expertise</div>
+    <h2 class="reveal"
+    style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:48px;">
+    My Tech Stack</h2>
+
+    <div class="bento">
+        <!-- Languages & Core -->
+        <div class="glass b-4 reveal" style="padding:28px;">
+            <div style="font-size:28px; margin-bottom:12px;">💻</div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:8px; color:#06b6d4;">
+                Languages & Core</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="pill pill-gray">Python</span>
+                <span class="pill pill-gray">SQL</span>
+                <span class="pill pill-gray">Bash</span>
+                <span class="pill pill-gray">Linux</span>
+                <span class="pill pill-gray">Git</span>
+                <span class="pill pill-gray">OOP</span>
+                <span class="pill pill-gray">REST API</span>
+            </div>
+        </div>
+        <!-- AI/ML & GenAI -->
+        <div class="glass b-8 reveal delay-1" style="padding:28px;">
+            <div style="font-size:28px; margin-bottom:12px;">🧠</div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:8px; color:#a78bfa;">
+                AI/ML & GenAI</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="pill pill-v">LLMs</span>
+                <span class="pill pill-v">RAG</span>
+                <span class="pill pill-v">NLP</span>
+                <span class="pill pill-v">Prompt Engineering</span>
+                <span class="pill pill-v">LangChain</span>
+                <span class="pill pill-v">Hugging Face</span>
+                <span class="pill pill-v">OpenAI API</span>
+                <span class="pill pill-v">Vector Search</span>
+                <span class="pill pill-v">Fine-tuning (basics)</span>
+            </div>
+        </div>
+        <!-- Frameworks -->
+        <div class="glass b-4 reveal delay-2" style="padding:28px;">
+            <div style="font-size:28px; margin-bottom:12px;">⚙️</div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:8px; color:#10b981;">
+                Frameworks</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="pill pill-e">PyTorch (learning)</span>
+                <span class="pill pill-e">Scikit-learn</span>
+                <span class="pill pill-e">Pandas</span>
+                <span class="pill pill-e">NumPy</span>
+                <span class="pill pill-e">FastAPI</span>
+                <span class="pill pill-e">Flask</span>
+                <span class="pill pill-e">Streamlit</span>
+            </div>
+        </div>
+        <!-- Data & Storage -->
+        <div class="glass b-4 reveal delay-2" style="padding:28px;">
+            <div style="font-size:28px; margin-bottom:12px;">🗄️</div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:8px; color:#06b6d4;">
+                Data & Storage</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="pill">PostgreSQL</span>
+                <span class="pill">MySQL</span>
+                <span class="pill">MongoDB</span>
+                <span class="pill">Chroma</span>
+                <span class="pill">FAISS</span>
+            </div>
+        </div>
+        <!-- Cloud & DevOps -->
+        <div class="glass b-4 reveal delay-3" style="padding:28px; background:rgba(124,58,237,0.03); border-color:rgba(124,58,237,0.1);">
+            <div style="font-size:28px; margin-bottom:12px;">☁️</div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:8px; color:#a78bfa;">
+                Cloud & DevOps</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="pill pill-v">Docker</span>
+                <span class="pill pill-v">Git/GitHub</span>
+                <span class="pill pill-v">GCP (Cloud Run, Secret Manager, Vertex AI)</span>
+                <span class="pill pill-v">CI/CD (GitHub Actions)</span>
+            </div>
+        </div>
+        <!-- Automation & Integration -->
+        <div class="glass b-4 reveal delay-3" style="padding:28px; background:rgba(16,185,129,0.03); border-color:rgba(16,185,129,0.1);">
+            <div style="font-size:28px; margin-bottom:12px;">🔌</div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:8px; color:#10b981;">
+                Automation & Integration</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                <span class="pill pill-e">n8n</span>
+                <span class="pill pill-e">Make.com</span>
+                <span class="pill pill-e">REST APIs</span>
+                <span class="pill pill-e">Webhooks</span>
+                <span class="pill pill-e">Asynchronous Programming</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="fancy">
+
+<!-- TECHNICAL ACHIEVEMENTS (unchanged) -->
+<section id="achievements"
+style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
+<div class="label reveal" style="margin-bottom:12px;">Milestones</div>
+<h2 class="reveal"
+style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:12px;">
+Technical Achievements
+</h2>
+<p class="reveal delay-1" style="font-size:14px; color:rgba(255,255,255,0.4); margin-bottom:40px; max-width:560px;">
+    Key milestones, certifications, and recognition from my journey in AI/ML engineering.
+</p>
+
+<div class="achievement-grid reveal delay-2">
+    <div class="achievement-card">
+        <div class="icon">📄</div>
+        <div class="number">3</div>
+        <div class="desc">Research Papers<br><span style="font-size:11px;color:rgba(255,255,255,0.3);">AI/ML
+                conferences</span></div>
+        <span class="tag">PUBLISHED</span>
+    </div>
+    <div class="achievement-card violet">
+        <div class="icon">🏆</div>
+        <div class="number">2</div>
+        <div class="desc">Hackathon Wins<br><span style="font-size:11px;color:rgba(255,255,255,0.3);">National
+                level</span></div>
+        <span class="tag">AWARDED</span>
+    </div>
+    <div class="achievement-card green">
+        <div class="icon">📜</div>
+        <div class="number">6</div>
+        <div class="desc">Certifications<br><span style="font-size:11px;color:rgba(255,255,255,0.3);">AWS, TensorFlow,
+                more</span></div>
+        <span class="tag">VERIFIED</span>
+    </div>
+    <div class="achievement-card gold">
+        <div class="icon">🌟</div>
+        <div class="number">50k+</div>
+        <div class="desc">Total Impressions<br><span style="font-size:11px;color:rgba(255,255,255,0.3);">Projects &
+                content</span></div>
+        <span class="tag">REACH</span>
+    </div>
+</div>
+
+<!-- Skill Proficiency (now includes more granular skills) -->
+<div class="glass reveal delay-3" style="padding:32px; margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:28px;">
+    <div>
+        <h4 style="font-size:15px; font-weight:700; margin-bottom:16px; color:#06b6d4;">Core Competencies</h4>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="skill-bar-wrap">
+                <span class="skill-label">Agentic AI</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:92%;"></div></div>
+                <span class="skill-pct">92%</span>
+            </div>
+            <div class="skill-bar-wrap">
+                <span class="skill-label">RAG Systems</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%;"></div></div>
+                <span class="skill-pct">88%</span>
+            </div>
+            <div class="skill-bar-wrap">
+                <span class="skill-label">NLP & LLMs</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:86%;"></div></div>
+                <span class="skill-pct">86%</span>
+            </div>
+            <div class="skill-bar-wrap">
+                <span class="skill-label">MLOps</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%;"></div></div>
+                <span class="skill-pct">80%</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h4 style="font-size:15px; font-weight:700; margin-bottom:16px; color:#a78bfa;">Tool Proficiency</h4>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="skill-bar-wrap">
+                <span class="skill-label">Python</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%;background:linear-gradient(90deg,#a78bfa,#7c3aed);"></div></div>
+                <span class="skill-pct">95%</span>
+            </div>
+            <div class="skill-bar-wrap">
+                <span class="skill-label">PyTorch / TF</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%;background:linear-gradient(90deg,#a78bfa,#7c3aed);"></div></div>
+                <span class="skill-pct">85%</span>
+            </div>
+            <div class="skill-bar-wrap">
+                <span class="skill-label">LangChain</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:84%;background:linear-gradient(90deg,#a78bfa,#7c3aed);"></div></div>
+                <span class="skill-pct">84%</span>
+            </div>
+            <div class="skill-bar-wrap">
+                <span class="skill-label">Docker / GCP</span>
+                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%;background:linear-gradient(90deg,#a78bfa,#7c3aed);"></div></div>
+                <span class="skill-pct">78%</span>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<hr class="fancy">
+
+<!-- PROJECTS (unchanged from previous) -->
+<section id="projects" style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
+    <div class="label reveal" style="margin-bottom:12px;">Selected Work</div>
+    <h2 class="reveal"
+    style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:48px;">
+    Projects</h2>
+
+    <div class="filter-row reveal delay-1">
+        <div style="flex:1; min-width:240px;">
+            <input id="projectSearch" class="filter-input" type="search" autocomplete="off"
+            placeholder="Search projects (agents, RAG, vision, voice, automation…)" aria-label="Search projects">
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="filter-chip active" data-filter="all">ALL</button>
+            <button type="button" class="filter-chip" data-filter="agent">AGENTS</button>
+            <button type="button" class="filter-chip" data-filter="rag">RAG</button>
+            <button type="button" class="filter-chip" data-filter="voice">VOICE</button>
+            <button type="button" class="filter-chip" data-filter="automation">AUTOMATION</button>
+            <button type="button" class="filter-chip" data-filter="fintech">FINTECH</button>
+            <button type="button" class="filter-chip" data-filter="featured">⭐ FEATURED</button>
+        </div>
+        <div id="projectMeta" class="filter-meta" style="margin-left:auto;">Showing 0</div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;" class="projects-grid">
+
+        <!-- University Search Agent - FEATURED -->
+        <div class="glass glass-hover reveal" style="padding:32px; grid-column:span 2; border-color:rgba(251,191,36,0.12);"
+        data-category="agent featured" data-title="University Search Agent"
+        data-tags="crewai supabase openai flask python student profiling multi-agent scoring recommender scraper">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+            <div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+                    <div class="project-icon">🎓</div>
+                    <div style="display:flex; gap:8px;">
+                        <span class="featured-badge">⭐ FEATURED</span>
+                        <span
+                        style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(6,182,212,0.3); color:#06b6d4; background:rgba(6,182,212,0.08);">MULTI-AGENT</span>
+                    </div>
+                </div>
+                <h3
+                style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.02em; margin-bottom:12px;">
+                University Search Agent</h3>
+                <p style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.75; margin-bottom:20px;">An
+                    AI-powered university matching platform for pgadmit.com. Autonomously searches, scores, and
+                    categorizes universities into Safety / Target / Reach tiers using live data and student
+                profiles stored in Supabase.</p>
+                <div
+                style="background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.1); border-radius:8px; padding:14px 16px; font-size:13px; color:rgba(255,255,255,0.55); line-height:1.6; margin-bottom:20px;">
+                <span style="color:#06b6d4; font-weight:600;">Key Innovation:</span> CrewAI coordinates
+                specialized sub-agents — Scraper, Scorer, and Recommender — producing a complete university
+                shortlist in under 30 seconds.
+            </div>
+        </div>
+        <div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:24px;">
+                <span class="pill">CrewAI</span><span class="pill">Supabase</span><span
+                class="pill">OpenAI</span><span class="pill">Flask</span><span
+                class="pill">Python</span><span class="pill">Student Profiling</span>
+            </div>
+            <a href="https://github.com/syedmusadiqhussain/University-search-agent-" target="_blank"
+            style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#06b6d4; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:gap 0.2s;">View
+            on GitHub →</a>
+        </div>
+    </div>
+</div>
+
+<!-- RAE Enterprise -->
+<div class="glass glass-e reveal delay-1" style="padding:32px;" data-category="fintech"
+data-title="RAE Enterprise"
+data-tags="finbert pytorch fastapi xau/usd crypto sentiment ai market intelligence news social technicals">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon project-icon-gold">📈</div>
+    <span
+    style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(251,191,36,0.3); color:#fbbf24; background:rgba(251,191,36,0.08);">SENTIMENT
+    AI</span>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+RAE Enterprise</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">AI-driven
+    market intelligence suite for XAU/USD gold and crypto markets. Analyzes sentiment signals from news,
+social data, and technicals to generate actionable trading insights.</p>
+<div
+style="background:rgba(251,191,36,0.05); border:1px solid rgba(251,191,36,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+<span style="color:#fbbf24; font-weight:600;">Stack:</span> FinBERT ensemble + LLM narrative analysis for
+macro market context.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill pill-gold">FinBERT</span><span class="pill pill-gold">PyTorch</span><span
+    class="pill pill-gold">FastAPI</span><span class="pill pill-gold">XAU/USD</span><span
+    class="pill pill-gold">Crypto</span>
+</div>
+<div class="gh-metrics" data-github-repo="syedmusadiqhussain/syedmusadiqhussain.github.io"></div>
+<a href="https://github.com/syedmusadiqhussain" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#fbbf24; text-decoration:none;">View
+on GitHub →</a>
+</div>
+
+<!-- AI Career Agent -->
+<div class="glass glass-v reveal delay-2" style="padding:32px;" data-category="agent featured"
+data-title="AI Career Agent"
+data-tags="gemini fastapi python self-healing scraper job discovery outreach dom selectors">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon project-icon-v">💼</div>
+    <div style="display:flex; gap:6px;">
+        <span class="featured-badge">⭐ FEATURED</span>
         <span
-            style="font-family:'Outfit',sans-serif; font-size:13px; font-weight:800; color:rgba(255,255,255,0.25);">SMH<span
-                style="color:#06b6d4;">.</span></span>
-    </footer>
+        style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(124,58,237,0.3); color:#a78bfa; background:rgba(124,58,237,0.08);">SELF-HEALING</span>
+    </div>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+AI Career Agent</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">Fully
+    autonomous job discovery engine that finds roles, identifies hiring managers, and sends personalized
+cold outreach — without human intervention.</p>
+<div
+style="background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+<span style="color:#a78bfa; font-weight:600;">Key Innovation:</span> Self-healing scraper that adapts its
+selectors in real-time when DOM changes are detected.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill pill-v">Gemini 1.5 Pro</span><span class="pill pill-v">FastAPI</span><span
+    class="pill pill-v">Python</span><span class="pill pill-v">Self-Healing Scraper</span>
+</div>
+<a href="https://github.com/syedmusadiqhussain" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#a78bfa; text-decoration:none;">View
+on GitHub →</a>
+</div>
 
-    <script>
-        // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+<!-- AI Voice WhatsApp -->
+<div class="glass glass-hover reveal delay-1" style="padding:32px;" data-category="voice"
+data-title="AI Voice WhatsApp Helper"
+data-tags="twilio whisper gemini serper whatsapp voice assistant realtime webhook transcription intent retrieval">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon">🎙️</div>
+    <span
+    style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(6,182,212,0.3); color:#06b6d4; background:rgba(6,182,212,0.08);">REAL-TIME</span>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+AI Voice WhatsApp Helper</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">Production-ready
+    WhatsApp voice assistant using the Twilio API. Transcribes voice notes with OpenAI Whisper,
+    processes intent with Gemini 2.0, retrieves web context via Serper, and replies — in seconds.</p>
+    <div
+    style="background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+    <span style="color:#06b6d4; font-weight:600;">Pipeline:</span> Twilio webhook → Whisper transcription →
+    Gemini 2.0 → Serper → Reply.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill">Twilio</span><span class="pill">Whisper</span><span class="pill">Gemini
+    2.0</span><span class="pill">Serper</span>
+</div>
+<a href="https://github.com/syedmusadiqhussain/AI-Voice-WhatsApp-Helper" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#06b6d4; text-decoration:none;">View
+on GitHub →</a>
+</div>
 
-        const deepModeBtn = document.getElementById("deepModeBtn");
-        const deepModeKey = "deepMode";
-        const setDeepMode = (enabled) => {
-            document.documentElement.classList.toggle("deep-mode", enabled);
-            if (deepModeBtn) deepModeBtn.setAttribute("aria-pressed", enabled ? "true" : "false");
-            if (deepModeBtn) deepModeBtn.textContent = enabled ? "DEEP: ON" : "DEEP";
-            try {
-                localStorage.setItem(deepModeKey, enabled ? "1" : "0");
-            } catch { }
-            if (typeof window.__toggleR3F === "function") window.__toggleR3F(!enabled);
-        };
+<!-- RAG Chat -->
+<div class="glass glass-e reveal delay-2" style="padding:32px;" data-category="rag"
+data-title="RAG Chat Assistant"
+data-tags="langchain chromadb pinecone transformers retrieval semantic search citations confidence hallucination control">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon project-icon-e">🗄️</div>
+    <span
+    style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(16,185,129,0.3); color:#10b981; background:rgba(16,185,129,0.08);">CONTEXT-AWARE</span>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+RAG Chat Assistant</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">End-to-end RAG
+    pipeline for chatting with private document collections. Features high-speed semantic search, document
+citations, and active hallucination control.</p>
+<div
+style="background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+<span style="color:#10b981; font-weight:600;">Architecture:</span> LangChain + ChromaDB with citation
+tracking. Refuses to hallucinate below confidence threshold.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill pill-e">LangChain</span><span class="pill pill-e">ChromaDB</span><span
+    class="pill pill-e">Pinecone</span><span class="pill pill-e">Transformers</span>
+</div>
+<a href="https://github.com/syedmusadiqhussain/RAG-Chat-Context-Aware-AI-Assistant" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#10b981; text-decoration:none;">View
+on GitHub →</a>
+</div>
 
-        const initialDeepMode = (() => {
-            try {
-                return localStorage.getItem(deepModeKey) === "1";
-            } catch {
-                return false;
+<!-- Web Scraper Pro -->
+<div class="glass glass-hover reveal delay-1" style="padding:32px;" data-category="automation"
+data-title="Web Scraper Pro with Real Data"
+data-tags="streamlit etl python dashboard logging database integration scraping real-time">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon">🕸️</div>
+    <span
+    style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(6,182,212,0.3); color:#06b6d4; background:rgba(6,182,212,0.08);">FULL-STACK</span>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+Web Scraper Pro with Real Data</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">A
+    production-ready, full-stack web scraping platform with a beautiful dark Streamlit dashboard,
+real-time logging, ETL pipeline, and database integration.</p>
+<div
+style="background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+<span style="color:#06b6d4; font-weight:600;">Pipeline:</span> Scrape → Transform → Load → Live dashboard
+with real-time logs.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill">Python</span><span class="pill">Streamlit</span><span
+    class="pill">ETL</span><span class="pill">Database</span>
+</div>
+<a href="https://github.com/syedmusadiqhussain/Web-Scraper-Pro-with-Real-Data" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#06b6d4; text-decoration:none;">View
+on GitHub →</a>
+</div>
+
+<!-- AI Google Maps Lead Generator -->
+<div class="glass glass-v reveal delay-2" style="padding:32px;" data-category="automation"
+data-title="AI Powered Google Maps Lead Generator"
+data-tags="google maps lead generation python scraping business outreach automation">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon project-icon-v">📍</div>
+    <span
+    style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(124,58,237,0.3); color:#a78bfa; background:rgba(124,58,237,0.08);">LEAD-GEN</span>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+AI-Powered Google Maps Lead Generator</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">Generates
+    business leads from Google Maps by searching for businesses matching location and query criteria,
+then scraping their websites to extract contact information automatically.</p>
+<div
+style="background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+<span style="color:#a78bfa; font-weight:600;">Pipeline:</span> Maps search → Business match → Website
+scrape → Contact extraction.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill pill-v">Python</span><span class="pill pill-v">Google Maps</span><span
+    class="pill pill-v">Lead Generation</span>
+</div>
+<a href="https://github.com/syedmusadiqhussain/AI-Powered-Google-Maps-Lead-Generator" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#a78bfa; text-decoration:none;">View
+on GitHub →</a>
+</div>
+
+<!-- Email Assistant Make.com -->
+<div class="glass glass-e reveal delay-3" style="padding:32px;" data-category="automation"
+data-title="Email Assistant Make.com"
+data-tags="make.com automation ai agents email classification drafting tool execution workflow">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+    <div class="project-icon project-icon-e">📧</div>
+    <span
+    style="font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid rgba(16,185,129,0.3); color:#10b981; background:rgba(16,185,129,0.08);">WORKFLOW
+    AI</span>
+</div>
+<h3
+style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">
+Email Assistant (Make.com)</h3>
+<p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:16px;">An
+    intelligent, agent-driven workflow built on Make.com that automates high-volume email classification,
+drafting, and tool execution — leveraging AI agents to watch and act on incoming mail.</p>
+<div
+style="background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.1); border-radius:8px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:18px;">
+<span style="color:#10b981; font-weight:600;">Pipeline:</span> Watch inbox → Classify → Draft reply →
+Execute tool actions.
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;">
+    <span class="pill pill-e">Make.com</span><span class="pill pill-e">AI Agents</span><span
+    class="pill pill-e">Email Automation</span>
+</div>
+<a href="https://github.com/syedmusadiqhussain/Email-Assistant-Make.com" target="_blank"
+style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#10b981; text-decoration:none;">View
+on GitHub →</a>
+</div>
+
+</div>
+</section>
+
+<hr class="fancy">
+
+<!-- PHILOSOPHY (unchanged) -->
+<section id="philosophy" style="padding:100px 40px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
+    <div class="label reveal" style="margin-bottom:12px;">Work Ethic</div>
+    <h2 class="reveal"
+    style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:48px;">
+    Technical Philosophy</h2>
+
+    <div class="glass reveal"
+    style="padding:56px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; position:relative; overflow:hidden;"
+    class="philo-grid">
+    <div
+    style="position:absolute; top:-80px; right:-80px; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle, rgba(6,182,212,0.07), transparent); pointer-events:none;">
+</div>
+
+<div>
+    <div
+    style="font-family:'Outfit',sans-serif; font-size:clamp(26px,3vw,42px); font-weight:900; line-height:1.15; letter-spacing:-0.04em; margin-bottom:24px;">
+    "Deep work is the <span style="color:#06b6d4;">superpower</span> of the <span
+    style="color:#a78bfa;">AI generation.</span>"
+</div>
+<p style="font-size:14px; color:rgba(255,255,255,0.45); line-height:1.75;">My approach combines
+    structured deep work sessions with rapid vibe coding — first understanding the problem deeply, then
+shipping fast.</p>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:22px;">
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+        <span
+        style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#06b6d4; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">3–8h</span>
+        <div>
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Daily Deep Work</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Every day structured
+                around focused, distraction-free sessions on complex AI systems. No shallow work in core
+            hours.</p>
+        </div>
+    </div>
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+        <span
+        style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#a78bfa; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">01</span>
+        <div>
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Vibe Coding for Rapid
+                Orchestration</h4>
+                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Leveraging intuition
+                    and AI-assisted coding to ship high-quality agentic systems at speed — without sacrificing
+                reliability.</p>
+            </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:flex-start;">
+            <span
+            style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#10b981; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">02</span>
+            <div>
+                <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Research First, Always</h4>
+                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Every project begins
+                    with understanding the state-of-the-art. Papers before prototypes. Understanding before
+                implementation.</p>
+            </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:flex-start;">
+            <span
+            style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#fbbf24; background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.2); padding:4px 8px; border-radius:4px; flex-shrink:0; margin-top:2px;">03</span>
+            <div>
+                <h4 style="font-size:15px; font-weight:700; margin-bottom:4px;">Production Mindset</h4>
+                <p style="font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6;">Every model gets
+                    containerized, every API gets documented, every system is tested at scale. No notebooks-only
+                projects.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<hr class="fancy">
+
+<!-- CONTACT (unchanged) -->
+<section id="contact"
+style="padding:100px 40px 80px; max-width:1100px; margin:0 auto; position:relative; z-index:1;">
+<div class="label reveal" style="margin-bottom:12px;">Get In Touch</div>
+<h2 class="reveal"
+style="font-family:'Outfit',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:16px;">
+Let's Build Something</h2>
+<p class="reveal"
+style="font-size:16px; color:rgba(255,255,255,0.45); margin-bottom:48px; max-width:480px; line-height:1.7;">
+Open to collaborations, freelance projects, and full-time roles in AI/ML engineering.
+</p>
+
+<div class="glass reveal"
+style="padding:40px; text-align:center; margin-bottom:32px; background:rgba(37,211,102,0.03); border-color:rgba(37,211,102,0.15);">
+<div style="font-size:36px; margin-bottom:12px;">💬</div>
+<h3 style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:800; margin-bottom:8px;">Chat on
+    WhatsApp</h3>
+    <p style="font-size:14px; color:rgba(255,255,255,0.45); margin-bottom:24px;">The fastest way to reach me. I
+        typically respond within a few hours.</p>
+        <a href="https://wa.me/923340051614" target="_blank"
+        style="display:inline-flex; align-items:center; gap:10px; padding:16px 32px; border-radius:12px; font-size:16px; font-weight:700; background:linear-gradient(135deg,#25d366,#128c7e); color:#fff; text-decoration:none; box-shadow:0 4px 28px rgba(37,211,102,0.35); transition:all 0.2s;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+        +92 334 005 1614
+    </a>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:80px;">
+    <a href="mailto:syedmusadiqhussain9@gmail.com" class="glass glass-hover"
+    style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
+    <div
+    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+    📧</div>
+    <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Email</div>
+        <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
+            syedmusadiqhussain9@gmail.com</div>
+        </div>
+    </a>
+    <a href="https://github.com/syedmusadiqhussain" target="_blank" class="glass glass-hover"
+    style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
+    <div
+    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+    💻</div>
+    <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;">GitHub</div>
+        <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
+            syedmusadiqhussain</div>
+        </div>
+    </a>
+    <a href="https://www.linkedin.com/in/syed-musadiq-hussain-9ba797336/" target="_blank"
+    class="glass glass-hover"
+    style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
+    <div
+    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+    💼</div>
+    <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;">LinkedIn</div>
+        <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">Syed
+            Musadiq Hussain</div>
+        </div>
+    </a>
+    <a href="https://www.kaggle.com/syedmusadiqhussain" target="_blank" class="glass glass-hover"
+    style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
+    <div
+    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+    📊</div>
+    <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Kaggle</div>
+        <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
+            syedmusadiqhussain</div>
+        </div>
+    </a>
+    <a href="https://www.youtube.com/@SyedMusadiqHussain-v8w" target="_blank" class="glass glass-hover"
+    style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
+    <div
+    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+    🎥</div>
+    <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;">YouTube</div>
+        <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
+            @SyedMusadiqHussain-v8w</div>
+        </div>
+    </a>
+    <a href="https://syedmusadiqhussain.github.io/" target="_blank" class="glass glass-hover"
+    style="padding:22px; display:flex; align-items:center; gap:14px; text-decoration:none; color:#fff;">
+    <div
+    style="width:38px;height:38px;border-radius:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">
+    🌐</div>
+    <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Portfolio</div>
+        <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.4);">
+            syedmusadiqhussain.github.io</div>
+        </div>
+    </a>
+</div>
+</section>
+
+<footer
+style="border-top:1px solid rgba(255,255,255,0.05); padding:28px 40px; max-width:1180px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
+<span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(255,255,255,0.3);">© 2026 Syed
+    Musadiq Hussain</span>
+    <span
+    style="font-family:'Outfit',sans-serif; font-size:13px; font-weight:800; color:rgba(255,255,255,0.25);">SMH<span
+    style="color:#06b6d4;">.</span></span>
+</footer>
+
+<script>
+    // --- SCROLL PROGRESS ---
+    const progressBar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = progress + '%';
+        progressBar.setAttribute('aria-valuenow', Math.round(progress));
+    });
+
+    // --- SCROLL REVEAL ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
             }
-        })();
-        setDeepMode(initialDeepMode);
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-        if (deepModeBtn) {
-            deepModeBtn.addEventListener("click", () => {
-                const enabled = !document.documentElement.classList.contains("deep-mode");
-                setDeepMode(enabled);
-            });
+    // --- DEEP MODE ---
+    const deepModeBtn = document.getElementById("deepModeBtn");
+    const deepModeKey = "deepMode";
+    const setDeepMode = (enabled) => {
+        document.documentElement.classList.toggle("deep-mode", enabled);
+        if (deepModeBtn) deepModeBtn.setAttribute("aria-pressed", enabled ? "true" : "false");
+        if (deepModeBtn) deepModeBtn.textContent = enabled ? "DEEP: ON" : "DEEP";
+        try {
+            localStorage.setItem(deepModeKey, enabled ? "1" : "0");
+        } catch {}
+        if (typeof window.__toggleR3F === "function") window.__toggleR3F(!enabled);
+    };
+
+    const initialDeepMode = (() => {
+        try {
+            return localStorage.getItem(deepModeKey) === "1";
+        } catch {
+            return false;
         }
+    })();
+    setDeepMode(initialDeepMode);
 
-        // Back to top
-        const btn = document.getElementById("backToTop");
-        window.addEventListener("scroll", () => {
-            btn.classList.toggle("show", window.scrollY > 400);
+    if (deepModeBtn) {
+        deepModeBtn.addEventListener("click", () => {
+            const enabled = !document.documentElement.classList.contains("deep-mode");
+            setDeepMode(enabled);
+        });
+    }
+
+    // --- BACK TO TOP ---
+    const btn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+        btn.classList.toggle("show", window.scrollY > 400);
+    });
+
+    // --- MOBILE PROJECTS GRID ---
+    if (window.innerWidth < 768) {
+        document.querySelectorAll(".projects-grid > div").forEach(card => {
+            card.style.gridColumn = "span 1";
+        });
+    }
+
+    // --- PROJECT FILTER ---
+    const projectCards = Array.from(document.querySelectorAll(".projects-grid > div"));
+    const projectSearch = document.getElementById("projectSearch");
+    const projectMeta = document.getElementById("projectMeta");
+    const filterChips = Array.from(document.querySelectorAll(".filter-chip"));
+    let activeFilter = "all";
+
+    const normalize = (s) => (s || "").toString().trim().toLowerCase();
+    const getHaystack = (el) => {
+        const title = normalize(el.getAttribute("data-title"));
+        const tags = normalize(el.getAttribute("data-tags"));
+        return `${title} ${tags}`;
+    };
+
+    const applyProjectFilter = () => {
+        const q = normalize(projectSearch ? projectSearch.value : "");
+        let shown = 0;
+
+        projectCards.forEach((card) => {
+            const cat = normalize(card.getAttribute("data-category")) || "all";
+            const cats = cat.split(' ');
+            const passCat = activeFilter === "all" || cats.includes(activeFilter);
+            const passText = !q || getHaystack(card).includes(q);
+            const show = passCat && passText;
+            card.style.display = show ? "" : "none";
+            if (show) shown += 1;
         });
 
-        // Mobile projects grid
-        if (window.innerWidth < 768) {
-            document.querySelectorAll(".projects-grid > div").forEach(card => {
-                card.style.gridColumn = "span 1";
-            });
-        }
+        if (projectMeta) projectMeta.textContent = `Showing ${shown}`;
+    };
 
-        // Hover effect on buttons
-        document.querySelectorAll("a[style*='transition']").forEach(el => {
-            el.addEventListener("mouseenter", function () {
-                if (this.style.background && this.style.background.includes("25d366")) return;
-                this.style.borderColor = "rgba(6,182,212,0.4)";
-            });
-            el.addEventListener("mouseleave", function () {
-                if (this.style.background && this.style.background.includes("25d366")) return;
-                this.style.borderColor = "rgba(255,255,255,0.1)";
-            });
+    filterChips.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            filterChips.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeFilter = normalize(btn.getAttribute("data-filter")) || "all";
+            applyProjectFilter();
         });
+    });
 
-        const projectCards = Array.from(document.querySelectorAll(".projects-grid > div"));
-        const projectSearch = document.getElementById("projectSearch");
-        const projectMeta = document.getElementById("projectMeta");
-        const filterChips = Array.from(document.querySelectorAll(".filter-chip"));
-        let activeFilter = "all";
+    if (projectSearch) {
+        projectSearch.addEventListener("input", applyProjectFilter, { passive: true });
+    }
+    applyProjectFilter();
 
-        const normalize = (s) => (s || "").toString().trim().toLowerCase();
-        const getHaystack = (el) => {
-            const title = normalize(el.getAttribute("data-title"));
-            const tags = normalize(el.getAttribute("data-tags"));
-            return `${title} ${tags}`;
-        };
-
-        const applyProjectFilter = () => {
-            const q = normalize(projectSearch ? projectSearch.value : "");
-            let shown = 0;
-
-            projectCards.forEach((card) => {
-                const cat = normalize(card.getAttribute("data-category")) || "all";
-                const passCat = activeFilter === "all" || cat === activeFilter;
-                const passText = !q || getHaystack(card).includes(q);
-                const show = passCat && passText;
-                card.style.display = show ? "" : "none";
-                if (show) shown += 1;
-            });
-
-            if (projectMeta) projectMeta.textContent = `Showing ${shown}`;
-        };
-
-        filterChips.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                filterChips.forEach((b) => b.classList.remove("active"));
-                btn.classList.add("active");
-                activeFilter = normalize(btn.getAttribute("data-filter")) || "all";
-                applyProjectFilter();
-            });
+    // --- SCROLL FLOAT ---
+    const scrollFloatEls = Array.from(document.querySelectorAll(".scroll-float"));
+    let scrollFloatRaf = 0;
+    const updateScrollFloat = () => {
+        scrollFloatRaf = 0;
+        const vh = window.innerHeight || 1;
+        scrollFloatEls.forEach((el) => {
+            const depth = Number(el.getAttribute("data-depth") || "1") || 1;
+            const rect = el.getBoundingClientRect();
+            const mid = rect.top + rect.height * 0.5;
+            const t = (mid - vh * 0.5) / vh;
+            const clamped = Math.max(-1, Math.min(1, t));
+            el.style.setProperty("--sfy", `${-clamped * depth * 18}px`);
+            el.style.setProperty("--sfrx", `${clamped * depth * 2.2}deg`);
+            el.style.setProperty("--sfry", `${-clamped * depth * 3.0}deg`);
         });
+    };
+    const scheduleScrollFloat = () => {
+        if (scrollFloatRaf) return;
+        scrollFloatRaf = requestAnimationFrame(updateScrollFloat);
+    };
+    window.addEventListener("scroll", scheduleScrollFloat, { passive: true });
+    window.addEventListener("resize", scheduleScrollFloat, { passive: true });
+    updateScrollFloat();
 
-        if (projectSearch) {
-            projectSearch.addEventListener("input", applyProjectFilter, { passive: true });
+    // --- GITHUB METRICS ---
+    const ghMetricEls = Array.from(document.querySelectorAll(".gh-metrics[data-github-repo]"));
+    const ghCache = new Map();
+    const formatAgo = (iso) => {
+        const ms = Date.now() - new Date(iso).getTime();
+        const s = Math.max(0, Math.floor(ms / 1000));
+        const m = Math.floor(s / 60);
+        const h = Math.floor(m / 60);
+        const d = Math.floor(h / 24);
+        if (d > 0) return `${d}d ago`;
+        if (h > 0) return `${h}h ago`;
+        if (m > 0) return `${m}m ago`;
+        return "just now";
+    };
+    const loadRepo = async (repo) => {
+        if (ghCache.has(repo)) return ghCache.get(repo);
+        const p = fetch(`https://api.github.com/repos/${repo}`, { headers: { "Accept": "application/vnd.github+json" } })
+            .then(r => (r.ok ? r.json() : null))
+            .catch(() => null);
+        ghCache.set(repo, p);
+        return p;
+    };
+    ghMetricEls.forEach(async (el) => {
+        const repo = (el.getAttribute("data-github-repo") || "").trim();
+        if (!repo) return;
+        el.textContent = "Loading GitHub…";
+        const data = await loadRepo(repo);
+        if (!data) {
+            el.textContent = "";
+            return;
         }
-        applyProjectFilter();
+        const stars = typeof data.stargazers_count === "number" ? data.stargazers_count : 0;
+        const forks = typeof data.forks_count === "number" ? data.forks_count : 0;
+        const updated = data.updated_at ? formatAgo(data.updated_at) : "";
+        el.textContent = `GitHub · ★${stars} · ⑂${forks}${updated ? ` · updated ${updated}` : ""}`;
+    });
 
-        const scrollFloatEls = Array.from(document.querySelectorAll(".scroll-float"));
-        let scrollFloatRaf = 0;
-        const updateScrollFloat = () => {
-            scrollFloatRaf = 0;
-            const vh = window.innerHeight || 1;
-            scrollFloatEls.forEach((el) => {
-                const depth = Number(el.getAttribute("data-depth") || "1") || 1;
-                const rect = el.getBoundingClientRect();
-                const mid = rect.top + rect.height * 0.5;
-                const t = (mid - vh * 0.5) / vh;
-                const clamped = Math.max(-1, Math.min(1, t));
-                el.style.setProperty("--sfy", `${-clamped * depth * 18}px`);
-                el.style.setProperty("--sfrx", `${clamped * depth * 2.2}deg`);
-                el.style.setProperty("--sfry", `${-clamped * depth * 3.0}deg`);
-            });
-        };
-        const scheduleScrollFloat = () => {
-            if (scrollFloatRaf) return;
-            scrollFloatRaf = requestAnimationFrame(updateScrollFloat);
-        };
-        window.addEventListener("scroll", scheduleScrollFloat, { passive: true });
-        window.addEventListener("resize", scheduleScrollFloat, { passive: true });
-        updateScrollFloat();
+    // --- AMBIENT MOUSE ---
+    const rootStyle = document.documentElement.style;
+    window.addEventListener("mousemove", (e) => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const mx = (e.clientX - cx) / cx;
+        rootStyle.setProperty("--amb-x", `${mx * 14}px`);
+    }, { passive: true });
 
-        const ghMetricEls = Array.from(document.querySelectorAll(".gh-metrics[data-github-repo]"));
-        const ghCache = new Map();
-        const formatAgo = (iso) => {
-            const ms = Date.now() - new Date(iso).getTime();
-            const s = Math.max(0, Math.floor(ms / 1000));
-            const m = Math.floor(s / 60);
-            const h = Math.floor(m / 60);
-            const d = Math.floor(h / 24);
-            if (d > 0) return `${d}d ago`;
-            if (h > 0) return `${h}h ago`;
-            if (m > 0) return `${m}m ago`;
-            return "just now";
-        };
-        const loadRepo = async (repo) => {
-            if (ghCache.has(repo)) return ghCache.get(repo);
-            const p = fetch(`https://api.github.com/repos/${repo}`, { headers: { "Accept": "application/vnd.github+json" } })
-                .then(r => (r.ok ? r.json() : null))
-                .catch(() => null);
-            ghCache.set(repo, p);
-            return p;
-        };
-        ghMetricEls.forEach(async (el) => {
-            const repo = (el.getAttribute("data-github-repo") || "").trim();
-            if (!repo) return;
-            el.textContent = "Loading GitHub…";
-            const data = await loadRepo(repo);
-            if (!data) {
-                el.textContent = "";
-                return;
+    window.addEventListener("scroll", () => {
+        rootStyle.setProperty("--amb-y", `${Math.min(120, window.scrollY * 0.08)}px`);
+    }, { passive: true });
+
+    // --- TILT EFFECT ---
+    const tiltTargets = Array.from(document.querySelectorAll(".glass, .hero-img-wrap"));
+    tiltTargets.forEach((el) => {
+        el.classList.add("tilt");
+        el.addEventListener("mousemove", (e) => {
+            const rect = el.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width;
+            const py = (e.clientY - rect.top) / rect.height;
+            const rx = (0.5 - py) * 10;
+            const ry = (px - 0.5) * 12;
+            el.style.setProperty("--rx", `${rx}deg`);
+            el.style.setProperty("--ry", `${ry}deg`);
+        });
+        el.addEventListener("mouseleave", () => {
+            el.style.setProperty("--rx", "0deg");
+            el.style.setProperty("--ry", "0deg");
+        });
+    });
+
+    // --- SKILL BARS ANIMATE ON SCROLL ---
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+                skillObserver.unobserve(bar);
             }
-            const stars = typeof data.stargazers_count === "number" ? data.stargazers_count : 0;
-            const forks = typeof data.forks_count === "number" ? data.forks_count : 0;
-            const updated = data.updated_at ? formatAgo(data.updated_at) : "";
-            el.textContent = `GitHub · ★${stars} · ⑂${forks}${updated ? ` · updated ${updated}` : ""}`;
+        });
+    }, { threshold: 0.3 });
+    skillBars.forEach(bar => skillObserver.observe(bar));
+</script>
+
+<script type="module">
+    import React, { useEffect, useMemo, useRef, useState } from "react";
+    import { createRoot } from "react-dom/client";
+    import { Canvas, useFrame, useThree } from "@react-three/fiber";
+    import { Stars } from "@react-three/drei";
+    import * as THREE from "three";
+    const e = React.createElement;
+    const F = React.Fragment;
+
+    const deviceIsSmall = () => window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+    const prefersReducedMotion = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const pointer = { x: 0.5, y: 0.5 };
+    const scroll = { y: 0 };
+    const onMouseMove = (e) => {
+        pointer.x = Math.max(0, Math.min(1, e.clientX / (window.innerWidth || 1)));
+        pointer.y = Math.max(0, Math.min(1, 1 - (e.clientY / (window.innerHeight || 1))));
+    };
+    const onScroll = () => {
+        scroll.y = window.scrollY || 0;
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    function ParallaxRig() {
+        const { camera } = useThree();
+        const target = useRef({ x: 0, y: 0 });
+        useFrame(() => {
+            target.current.x = (pointer.x - 0.5) * 0.55;
+            target.current.y = (pointer.y - 0.5) * 0.3;
+            camera.position.x += (target.current.x - camera.position.x) * 0.04;
+            camera.position.y += (target.current.y - camera.position.y) * 0.04;
+            camera.lookAt(0, 0, 0);
+        });
+        return null;
+    }
+
+    function Galaxy() {
+        const groupRef = useRef();
+        const { positions, colors } = useMemo(() => {
+            const small = deviceIsSmall();
+            const count = small ? 4200 : 8200;
+            const pos = new Float32Array(count * 3);
+            const col = new Float32Array(count * 3);
+            const cInner = new THREE.Color(0x6ee7ff);
+            const cMid = new THREE.Color(0x7c3aed);
+            const cOuter = new THREE.Color(0x020617);
+
+            const arms = 4;
+            const armOffset = (Math.PI * 2) / arms;
+            const maxR = small ? 8.5 : 10.5;
+
+            for (let i = 0; i < count; i++) {
+                const t = i / count;
+                const r = Math.pow(Math.random(), 0.6) * maxR;
+                const arm = Math.floor(Math.random() * arms);
+                const baseAngle = arm * armOffset;
+                const spin = r * 0.55;
+                const angle = baseAngle + spin + (Math.random() - 0.5) * 0.75;
+                const height = (Math.random() - 0.5) * (0.18 + r * 0.03);
+                const spread = (1 - clamp(r / maxR, 0, 1));
+                const jitter = (Math.random() - 0.5) * (0.35 + (1 - spread) * 0.8);
+
+                const x = Math.cos(angle) * r + jitter;
+                const y = height;
+                const z = Math.sin(angle) * r + (Math.random() - 0.5) * 0.25;
+
+                pos[i * 3] = x;
+                pos[i * 3 + 1] = y;
+                pos[i * 3 + 2] = z - 16;
+
+                const mixA = clamp(1 - r / (maxR * 0.85), 0, 1);
+                const mixB = clamp(r / maxR, 0, 1);
+                const c = cInner.clone().lerp(cMid, 1 - mixA).lerp(cOuter, mixB * 0.55);
+                const bloom = 0.15 + (1 - t) * 0.25;
+                col[i * 3] = clamp(c.r + bloom, 0, 1);
+                col[i * 3 + 1] = clamp(c.g + bloom * 0.8, 0, 1);
+                col[i * 3 + 2] = clamp(c.b + bloom * 1.1, 0, 1);
+            }
+            return { positions: pos, colors: col };
+        }, []);
+
+        useFrame((state, delta) => {
+            if (!groupRef.current) return;
+            groupRef.current.rotation.y += delta * 0.04;
+            groupRef.current.rotation.z += delta * 0.012;
         });
 
-        const rootStyle = document.documentElement.style;
-        let mx = 0;
-        let my = 0;
-        let mouseX01 = 0.5;
-        let mouseY01 = 0.5;
-        window.addEventListener("mousemove", (e) => {
-            const cx = window.innerWidth / 2;
-            const cy = window.innerHeight / 2;
-            mx = (e.clientX - cx) / cx;
-            my = (e.clientY - cy) / cy;
-            rootStyle.setProperty("--amb-x", `${mx * 14}px`);
-            mouseX01 = Math.max(0, Math.min(1, e.clientX / (window.innerWidth || 1)));
-            mouseY01 = Math.max(0, Math.min(1, 1 - (e.clientY / (window.innerHeight || 1))));
-        }, { passive: true });
-
-        window.addEventListener("scroll", () => {
-            rootStyle.setProperty("--amb-y", `${Math.min(120, window.scrollY * 0.08)}px`);
-        }, { passive: true });
-
-        const tiltTargets = Array.from(document.querySelectorAll(".glass, .hero-img-wrap"));
-        tiltTargets.forEach((el) => {
-            el.classList.add("tilt");
-            el.addEventListener("mousemove", (e) => {
-                const rect = el.getBoundingClientRect();
-                const px = (e.clientX - rect.left) / rect.width;
-                const py = (e.clientY - rect.top) / rect.height;
-                const rx = (0.5 - py) * 10;
-                const ry = (px - 0.5) * 12;
-                el.style.setProperty("--rx", `${rx}deg`);
-                el.style.setProperty("--ry", `${ry}deg`);
-            });
-            el.addEventListener("mouseleave", () => {
-                el.style.setProperty("--rx", "0deg");
-                el.style.setProperty("--ry", "0deg");
-            });
-        });
-    </script>
-
-    <script type="module">
-        import React, { useEffect, useMemo, useRef, useState } from "react";
-        import { createRoot } from "react-dom/client";
-        import { Canvas, useFrame, useThree } from "@react-three/fiber";
-        import { Stars } from "@react-three/drei";
-        import * as THREE from "three";
-        const e = React.createElement;
-        const F = React.Fragment;
-
-        const deviceIsSmall = () => window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
-        const prefersReducedMotion = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        const pointer = { x: 0.5, y: 0.5 };
-        const scroll = { y: 0 };
-        const onMouseMove = (e) => {
-            pointer.x = Math.max(0, Math.min(1, e.clientX / (window.innerWidth || 1)));
-            pointer.y = Math.max(0, Math.min(1, 1 - (e.clientY / (window.innerHeight || 1))));
-        };
-        const onScroll = () => {
-            scroll.y = window.scrollY || 0;
-        };
-        window.addEventListener("mousemove", onMouseMove, { passive: true });
-        window.addEventListener("scroll", onScroll, { passive: true });
-
-        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-        function ParallaxRig() {
-            const { camera } = useThree();
-            const target = useRef({ x: 0, y: 0 });
-            useFrame(() => {
-                target.current.x = (pointer.x - 0.5) * 0.55;
-                target.current.y = (pointer.y - 0.5) * 0.3;
-                camera.position.x += (target.current.x - camera.position.x) * 0.04;
-                camera.position.y += (target.current.y - camera.position.y) * 0.04;
-                camera.lookAt(0, 0, 0);
-            });
-            return null;
-        }
-
-        function Galaxy() {
-            const groupRef = useRef();
-            const { positions, colors } = useMemo(() => {
-                const small = deviceIsSmall();
-                const count = small ? 4200 : 8200;
-                const pos = new Float32Array(count * 3);
-                const col = new Float32Array(count * 3);
-                const cInner = new THREE.Color(0x6ee7ff);
-                const cMid = new THREE.Color(0x7c3aed);
-                const cOuter = new THREE.Color(0x020617);
-
-                const arms = 4;
-                const armOffset = (Math.PI * 2) / arms;
-                const maxR = small ? 8.5 : 10.5;
-
-                for (let i = 0; i < count; i++) {
-                    const t = i / count;
-                    const r = Math.pow(Math.random(), 0.6) * maxR;
-                    const arm = Math.floor(Math.random() * arms);
-                    const baseAngle = arm * armOffset;
-                    const spin = r * 0.55;
-                    const angle = baseAngle + spin + (Math.random() - 0.5) * 0.75;
-                    const height = (Math.random() - 0.5) * (0.18 + r * 0.03);
-                    const spread = (1 - clamp(r / maxR, 0, 1));
-                    const jitter = (Math.random() - 0.5) * (0.35 + (1 - spread) * 0.8);
-
-                    const x = Math.cos(angle) * r + jitter;
-                    const y = height;
-                    const z = Math.sin(angle) * r + (Math.random() - 0.5) * 0.25;
-
-                    pos[i * 3] = x;
-                    pos[i * 3 + 1] = y;
-                    pos[i * 3 + 2] = z - 16;
-
-                    const mixA = clamp(1 - r / (maxR * 0.85), 0, 1);
-                    const mixB = clamp(r / maxR, 0, 1);
-                    const c = cInner.clone().lerp(cMid, 1 - mixA).lerp(cOuter, mixB * 0.55);
-                    const bloom = 0.15 + (1 - t) * 0.25;
-                    col[i * 3] = clamp(c.r + bloom, 0, 1);
-                    col[i * 3 + 1] = clamp(c.g + bloom * 0.8, 0, 1);
-                    col[i * 3 + 2] = clamp(c.b + bloom * 1.1, 0, 1);
-                }
-                return { positions: pos, colors: col };
-            }, []);
-
-            useFrame((state, delta) => {
-                if (!groupRef.current) return;
-                groupRef.current.rotation.y += delta * 0.04;
-                groupRef.current.rotation.z += delta * 0.012;
-            });
-
-            return e(
-                "group",
-                { ref: groupRef },
+        return e(
+            "group", { ref: groupRef },
+            e(
+                "points", null,
                 e(
-                    "points",
-                    null,
-                    e(
-                        "bufferGeometry",
-                        null,
-                        e("bufferAttribute", {
-                            attach: "attributes-position",
-                            count: positions.length / 3,
-                            array: positions,
-                            itemSize: 3
-                        }),
-                        e("bufferAttribute", {
-                            attach: "attributes-color",
-                            count: colors.length / 3,
-                            array: colors,
-                            itemSize: 3
-                        })
-                    ),
-                    e("pointsMaterial", {
-                        size: 0.03,
-                        sizeAttenuation: true,
-                        transparent: true,
-                        opacity: 0.62,
-                        vertexColors: true,
-                        depthWrite: false,
-                        blending: THREE.AdditiveBlending
+                    "bufferGeometry", null,
+                    e("bufferAttribute", {
+                        attach: "attributes-position",
+                        count: positions.length / 3,
+                        array: positions,
+                        itemSize: 3
+                    }),
+                    e("bufferAttribute", {
+                        attach: "attributes-color",
+                        count: colors.length / 3,
+                        array: colors,
+                        itemSize: 3
                     })
-                )
-            );
-        }
-
-        function CosmicDust() {
-            const matRef = useRef();
-            const meshRef = useRef();
-            const uniforms = useMemo(() => ({
-                uTime: { value: 0 },
-                uScroll: { value: 0 },
-                uMouse: { value: new THREE.Vector2(0.5, 0.5) }
-            }), []);
-
-            useFrame((state, delta) => {
-                uniforms.uTime.value += delta;
-                uniforms.uScroll.value = scroll.y * 0.0003;
-                uniforms.uMouse.value.set(pointer.x, pointer.y);
-                if (meshRef.current) meshRef.current.position.z = -2.6;
-                if (matRef.current) matRef.current.needsUpdate = false;
-            });
-
-            return e(
-                "mesh",
-                { ref: meshRef, position: [0, 0, -2.6], rotation: [0, 0, 0] },
-                e("planeGeometry", { args: [18, 10, 1, 1] }),
-                e("shaderMaterial", {
-                    ref: matRef,
+                ),
+                e("pointsMaterial", {
+                    size: 0.03,
+                    sizeAttenuation: true,
                     transparent: true,
+                    opacity: 0.62,
+                    vertexColors: true,
                     depthWrite: false,
-                    uniforms,
-                    vertexShader: `
+                    blending: THREE.AdditiveBlending
+                })
+            )
+        );
+    }
+
+    function CosmicDust() {
+        const matRef = useRef();
+        const meshRef = useRef();
+        const uniforms = useMemo(() => ({
+            uTime: { value: 0 },
+            uScroll: { value: 0 },
+            uMouse: { value: new THREE.Vector2(0.5, 0.5) }
+        }), []);
+
+        useFrame((state, delta) => {
+            uniforms.uTime.value += delta;
+            uniforms.uScroll.value = scroll.y * 0.0003;
+            uniforms.uMouse.value.set(pointer.x, pointer.y);
+            if (meshRef.current) meshRef.current.position.z = -2.6;
+            if (matRef.current) matRef.current.needsUpdate = false;
+        });
+
+        return e(
+            "mesh", { ref: meshRef, position: [0, 0, -2.6], rotation: [0, 0, 0] },
+            e("planeGeometry", { args: [18, 10, 1, 1] }),
+            e("shaderMaterial", {
+                ref: matRef,
+                transparent: true,
+                depthWrite: false,
+                uniforms,
+                vertexShader: `
                             varying vec2 vUv;
                             void main() {
                                 vUv = uv;
                                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
                             }
                         `,
-                    fragmentShader: `
+                fragmentShader: `
                             precision highp float;
                             varying vec2 vUv;
                             uniform float uTime;
@@ -1797,53 +2161,54 @@
                                 gl_FragColor = vec4(c, a);
                             }
                         `
-                })
-            );
-        }
+            })
+        );
+    }
 
-        function SpaceScene() {
-            const small = deviceIsSmall();
-            return e(
-                F,
-                null,
-                e(ParallaxRig, null),
-                e(Stars, { radius: 120, depth: 60, count: small ? 2600 : 5200, factor: 3, saturation: 0, fade: true, speed: 0.6 }),
-                e(Stars, { radius: 80, depth: 40, count: small ? 900 : 1600, factor: 7, saturation: 0, fade: true, speed: 1.2 }),
-                e(Galaxy, null),
-                e(CosmicDust, null)
-            );
-        }
+    function SpaceScene() {
+        const small = deviceIsSmall();
+        return e(
+            F, null,
+            e(ParallaxRig, null),
+            e(Stars, { radius: 120, depth: 60, count: small ? 2600 : 5200, factor: 3, saturation: 0, fade: true,
+                speed: 0.6 }),
+            e(Stars, { radius: 80, depth: 40, count: small ? 900 : 1600, factor: 7, saturation: 0, fade: true,
+                speed: 1.2 }),
+            e(Galaxy, null),
+            e(CosmicDust, null)
+        );
+    }
 
-        function BackgroundApp() {
-            const [enabled, setEnabled] = useState(() => !document.documentElement.classList.contains("deep-mode") && !prefersReducedMotion());
+    function BackgroundApp() {
+        const [enabled, setEnabled] = useState(() => !document.documentElement.classList.contains("deep-mode") && !
+            prefersReducedMotion());
 
-            useEffect(() => {
-                window.__toggleR3F = (on) => setEnabled(Boolean(on) && !prefersReducedMotion());
-                return () => {
-                    delete window.__toggleR3F;
-                };
-            }, []);
+        useEffect(() => {
+            window.__toggleR3F = (on) => setEnabled(Boolean(on) && !prefersReducedMotion());
+            return () => {
+                delete window.__toggleR3F;
+            };
+        }, []);
 
-            if (!enabled) return null;
+        if (!enabled) return null;
 
-            return e(
-                Canvas,
-                {
-                    dpr: [1, 1.5],
-                    frameloop: "always",
-                    gl: { alpha: true, antialias: false, powerPreference: "high-performance" },
-                    camera: { position: [0, 0.15, 8], fov: 55, near: 0.1, far: 200 }
-                },
-                e(SpaceScene, null)
-            );
-        }
+        return e(
+            Canvas, {
+                dpr: [1, 1.5],
+                frameloop: "always",
+                gl: { alpha: true, antialias: false, powerPreference: "high-performance" },
+                camera: { position: [0, 0.15, 8], fov: 55, near: 0.1, far: 200 }
+            },
+            e(SpaceScene, null)
+        );
+    }
 
-        const mount = document.getElementById("r3f-bg");
-        if (mount) {
-            const root = createRoot(mount);
-            root.render(React.createElement(BackgroundApp));
-        }
-    </script>
+    const mount = document.getElementById("r3f-bg");
+    if (mount) {
+        const root = createRoot(mount);
+        root.render(React.createElement(BackgroundApp));
+    }
+</script>
 </body>
 
 </html>
